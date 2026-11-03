@@ -1,0 +1,461 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>jQuery Lab Programs</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #f1f5f9;
+            color: #222;
+        }
+
+        h1 {
+            text-align: center;
+            color: #173b67;
+        }
+
+        .program {
+            max-width: 750px;
+            margin: 25px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #00000015;
+        }
+
+        h2 {
+            color: #176b55;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #bbb;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        input[type="radio"] {
+            width: auto;
+        }
+
+        button {
+            background: #176b55;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 5px;
+            margin-top: 18px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #104b3b;
+        }
+
+        .result {
+            display: none;
+            background: #effaf3;
+            border: 1px solid #cce8d5;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 6px;
+        }
+
+        .result p {
+            display: flex;
+            justify-content: space-between;
+            gap: 15px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 8px;
+        }
+
+        .result p:last-child {
+            border-bottom: none;
+        }
+
+        .tip-options {
+            display: flex;
+            gap: 18px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .tip-options label {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            margin: 0;
+            font-weight: normal;
+        }
+
+        .tip-options input {
+            width: auto;
+        }
+
+        .car-preview {
+            background: #eaf0f5;
+            padding: 15px;
+            margin-top: 20px;
+            border-radius: 8px;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .car-preview svg {
+            width: 100%;
+            max-width: 580px;
+            height: auto;
+        }
+
+        .note {
+            color: #666;
+            font-size: 13px;
+        }
+
+        @media (max-width: 500px) {
+            body {
+                padding: 10px;
+            }
+
+            .program {
+                padding: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>jQuery Lab Programs</h1>
+
+    <!-- QUESTION 1: BUDGET CALCULATOR -->
+
+    <div class="program">
+        <h2>1. Budget Calculator</h2>
+        <p>Enter your total amount and allocate it using percentages.</p>
+
+        <form id="budgetForm">
+            <label for="budgetAmount">Total Amount (₹)</label>
+            <input type="number" id="budgetAmount" min="0.01"
+                   step="any" placeholder="Enter amount" required>
+
+            <label for="rentPercent">Room Rent (%)</label>
+            <input type="number" id="rentPercent" value="30"
+                   min="0" max="100" step="any" required>
+
+            <label for="accessoryPercent">Accessories (%)</label>
+            <input type="number" id="accessoryPercent" value="20"
+                   min="0" max="100" step="any" required>
+
+            <label for="emergencyPercent">Emergency (%)</label>
+            <input type="number" id="emergencyPercent" value="10"
+                   min="0" max="100" step="any" required>
+
+            <label for="savingPercent">Savings (%)</label>
+            <input type="number" id="savingPercent" value="40"
+                   min="0" max="100" step="any" required>
+
+            <button type="submit">Evaluate My Money</button>
+        </form>
+
+        <div class="result" id="budgetResult">
+            <h3>Budget Breakdown</h3>
+            <p><span>Room Rent</span><strong id="rentValue"></strong></p>
+            <p><span>Accessories</span><strong id="accessoryValue"></strong></p>
+            <p><span>Emergency Fund</span><strong id="emergencyValue"></strong></p>
+            <p><span>Savings</span><strong id="savingValue"></strong></p>
+            <p><span>Total Allocated</span><strong id="budgetTotal"></strong></p>
+        </div>
+    </div>
+
+
+    <!-- QUESTION 2: CAKE ORDER CALCULATOR -->
+
+    <div class="program">
+        <h2>2. Cake Order Calculator</h2>
+        <p>Choose the cake size, quantity, tax, and tip to calculate the bill.</p>
+
+        <form id="cakeForm">
+            <label for="cakeSize">Cake Size</label>
+            <select id="cakeSize">
+                <option value="100">0.5 KG - ₹100</option>
+                <option value="200" selected>1 KG - ₹200</option>
+                <option value="400">2 KG - ₹400</option>
+            </select>
+
+            <label for="cakeQuantity">Quantity</label>
+            <input type="number" id="cakeQuantity" value="1"
+                   min="1" step="1" required>
+
+            <label for="cakeTax">Tax (%)</label>
+            <input type="number" id="cakeTax" value="9"
+                   min="0" max="100" step="any" required>
+
+            <label>Tip Percentage</label>
+            <div class="tip-options">
+                <label><input type="radio" name="cakeTip" value="10"> 10%</label>
+                <label><input type="radio" name="cakeTip" value="15" checked> 15%</label>
+                <label><input type="radio" name="cakeTip" value="20"> 20%</label>
+                <label><input type="radio" name="cakeTip" value="0"> No Tip</label>
+            </div>
+
+            <button type="submit">Calculate Cake Order</button>
+        </form>
+
+        <div class="result" id="cakeResult">
+            <h3>Order Bill</h3>
+            <p><span>Price per Cake</span><strong id="cakePriceResult"></strong></p>
+            <p><span>Quantity</span><strong id="cakeQuantityResult"></strong></p>
+            <p><span>Subtotal</span><strong id="cakeSubtotal"></strong></p>
+            <p><span>Tax Amount</span><strong id="cakeTaxResult"></strong></p>
+            <p><span>Tip Amount</span><strong id="cakeTipResult"></strong></p>
+            <p><span>Total Amount</span><strong id="cakeTotal"></strong></p>
+        </div>
+    </div>
+
+
+    <!-- QUESTION 3: CAR BODY WORKSHOP -->
+
+    <div class="program">
+        <h2>3. Car Body Workshop</h2>
+        <p>Customize your car by changing its body colour, glass tint, and tyre size.</p>
+
+        <label for="carColor">Car Body Colour</label>
+        <select id="carColor">
+            <option value="#e53935">Red</option>
+            <option value="#1565c0">Blue</option>
+            <option value="#212121">Black</option>
+            <option value="#fdd835">Yellow</option>
+            <option value="#43a047">Green</option>
+            <option value="#eeeeee">White</option>
+            <option value="#8e24aa">Purple</option>
+        </select>
+
+        <label for="glassTint">Glass Tint</label>
+        <select id="glassTint">
+            <option value="#b3e5fc">Light Blue</option>
+            <option value="#78909c">Grey</option>
+            <option value="#263238">Dark Tint</option>
+            <option value="#ffffff">Clear / White</option>
+            <option value="#80cbc4">Green Tint</option>
+        </select>
+
+        <label for="tyreSize">Tyre Size</label>
+        <select id="tyreSize">
+            <option value="18">Small</option>
+            <option value="23" selected>Medium</option>
+            <option value="28">Large</option>
+        </select>
+
+        <div class="car-preview">
+            <svg id="carSvg" viewBox="0 0 560 240"
+                 xmlns="http://www.w3.org/2000/svg"
+                 role="img" aria-label="Customizable car preview">
+
+                <!-- Ground -->
+                <line x1="25" y1="205" x2="535" y2="205"
+                      stroke="#b0bec5" stroke-width="3"/>
+
+                <!-- Car body -->
+                <path id="carBody"
+                      d="M65 160 L85 125 Q95 115 130 110
+                         L180 65 Q195 50 225 50 L335 50
+                         Q355 50 375 75 L420 120
+                         L470 135 Q490 142 495 160
+                         L495 180 L65 180 Z"
+                      fill="#e53935" stroke="#333333" stroke-width="3"/>
+
+                <!-- Front glass -->
+                <path id="frontGlass"
+                      d="M190 70 Q198 60 225 60 L265 60 L265 108
+                         L155 108 Z"
+                      fill="#b3e5fc" stroke="#333333" stroke-width="3"/>
+
+                <!-- Rear glass -->
+                <path id="rearGlass"
+                      d="M280 60 L335 60 Q350 60 365 80
+                         L390 108 L280 108 Z"
+                      fill="#b3e5fc" stroke="#333333" stroke-width="3"/>
+
+                <!-- Door details -->
+                <line x1="275" y1="110" x2="275" y2="175"
+                      stroke="#333333" stroke-width="3"/>
+                <line x1="155" y1="145" x2="185" y2="145"
+                      stroke="#333333" stroke-width="3"/>
+                <line x1="305" y1="145" x2="335" y2="145"
+                      stroke="#333333" stroke-width="3"/>
+
+                <!-- Headlight and tail light -->
+                <rect x="465" y="143" width="22" height="13"
+                      rx="4" fill="#fff59d" stroke="#333"/>
+                <rect x="68" y="143" width="15" height="15"
+                      rx="3" fill="#ef5350" stroke="#333"/>
+
+                <!-- Wheels -->
+                <circle id="rearTyre" cx="155" cy="180" r="23"
+                        fill="#212121" stroke="#555" stroke-width="3"/>
+                <circle id="rearRim" cx="155" cy="180" r="10"
+                        fill="#b0bec5" stroke="#eeeeee" stroke-width="3"/>
+
+                <circle id="frontTyre" cx="405" cy="180" r="23"
+                        fill="#212121" stroke="#555" stroke-width="3"/>
+                <circle id="frontRim" cx="405" cy="180" r="10"
+                        fill="#b0bec5" stroke="#eeeeee" stroke-width="3"/>
+            </svg>
+
+            <p class="note">Your car preview updates when you change the options.</p>
+        </div>
+
+        <button type="button" id="resetCar">Reset Car</button>
+    </div>
+
+
+    <script>
+        $(document).ready(function () {
+
+            // QUESTION 1: BUDGET CALCULATOR
+
+            $("#budgetForm").on("submit", function (event) {
+                event.preventDefault();
+
+                var amount = parseFloat($("#budgetAmount").val());
+                var rent = parseFloat($("#rentPercent").val());
+                var accessories = parseFloat($("#accessoryPercent").val());
+                var emergency = parseFloat($("#emergencyPercent").val());
+                var saving = parseFloat($("#savingPercent").val());
+
+                var percentages = [rent, accessories, emergency, saving];
+
+                if (!Number.isFinite(amount) || amount <= 0) {
+                    alert("Please enter a valid amount greater than zero.");
+                    return;
+                }
+
+                for (var i = 0; i < percentages.length; i++) {
+                    if (!Number.isFinite(percentages[i]) ||
+                        percentages[i] < 0 || percentages[i] > 100) {
+                        alert("Each percentage must be between 0 and 100.");
+                        return;
+                    }
+                }
+
+                var percentTotal = rent + accessories + emergency + saving;
+
+                if (Math.abs(percentTotal - 100) > 0.000001) {
+                    alert("The total percentage must equal 100%.");
+                    return;
+                }
+
+                $("#rentValue").text("₹" + (amount * rent / 100).toFixed(2));
+                $("#accessoryValue").text("₹" + (amount * accessories / 100).toFixed(2));
+                $("#emergencyValue").text("₹" + (amount * emergency / 100).toFixed(2));
+                $("#savingValue").text("₹" + (amount * saving / 100).toFixed(2));
+
+                $("#budgetTotal").text("₹" + amount.toFixed(2));
+
+                $("#budgetResult").slideDown();
+            });
+
+
+            // QUESTION 2: CAKE ORDER CALCULATOR
+
+            $("#cakeForm").on("submit", function (event) {
+                event.preventDefault();
+
+                var price = parseFloat($("#cakeSize").val());
+                var quantity = parseInt($("#cakeQuantity").val(), 10);
+                var taxPercent = parseFloat($("#cakeTax").val());
+                var tipPercent = parseFloat(
+                    $("input[name='cakeTip']:checked").val()
+                );
+
+                if (!Number.isFinite(quantity) || quantity < 1) {
+                    alert("Please enter a valid quantity of at least 1.");
+                    return;
+                }
+
+                if (!Number.isFinite(taxPercent) ||
+                    taxPercent < 0 || taxPercent > 100) {
+                    alert("Tax must be between 0 and 100.");
+                    return;
+                }
+
+                var subtotal = price * quantity;
+                var taxAmount = subtotal * taxPercent / 100;
+                var tipAmount = subtotal * tipPercent / 100;
+                var total = subtotal + taxAmount + tipAmount;
+
+                $("#cakePriceResult").text("₹" + price.toFixed(2));
+                $("#cakeQuantityResult").text(quantity);
+                $("#cakeSubtotal").text("₹" + subtotal.toFixed(2));
+                $("#cakeTaxResult").text("₹" + taxAmount.toFixed(2));
+                $("#cakeTipResult").text("₹" + tipAmount.toFixed(2));
+                $("#cakeTotal").text("₹" + total.toFixed(2));
+
+                $("#cakeResult").slideDown();
+            });
+
+
+            // QUESTION 3: CAR BODY WORKSHOP
+
+            function updateCar() {
+                var bodyColor = $("#carColor").val();
+                var glassColor = $("#glassTint").val();
+                var tyreRadius = parseInt($("#tyreSize").val(), 10);
+                var rimRadius = Math.max(6, Math.round(tyreRadius * 0.43));
+
+                // Change body colour
+                $("#carBody").attr("fill", bodyColor);
+
+                // Change glass tint
+                $("#frontGlass, #rearGlass").attr("fill", glassColor);
+
+                // Change tyre sizes
+                $("#rearTyre, #frontTyre").attr("r", tyreRadius);
+
+                // Scale the rims with the tyres
+                $("#rearRim, #frontRim").attr("r", rimRadius);
+            }
+
+            $("#carColor, #glassTint, #tyreSize").on("change", function () {
+                updateCar();
+            });
+
+            $("#resetCar").on("click", function () {
+                $("#carColor").val("#e53935");
+                $("#glassTint").val("#b3e5fc");
+                $("#tyreSize").val("23");
+                updateCar();
+            });
+
+            // Apply initial car settings
+            updateCar();
+
+        });
+    </script>
+
+</body>
+</html>
